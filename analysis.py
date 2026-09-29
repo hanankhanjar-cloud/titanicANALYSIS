@@ -17,7 +17,7 @@ AGE_LABELS = ["0-12", "13-18", "19-35", "36-50", "51+"]
 
 def load_data() -> pd.DataFrame:
     df = pd.read_csv(DATA_PATH)
-    df["Title"] = df["Name"].str.extract(r", ([^.]+)\.")
+    df["Title"] = df["Name"].str.extract(r", ([^.]+)\.", expand=False)
     df["FamilySize"] = df["SibSp"] + df["Parch"] + 1
     df["IsAlone"] = (df["FamilySize"] == 1).astype(int)
     df["HasCabin"] = df["Cabin"].notna().astype(int)
